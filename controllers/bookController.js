@@ -1,7 +1,7 @@
 const {bookModel, userModel} = require('../models');
 
-function newBook(isbn, title, authors, published, subtitle, rating, thumbnails, userId, description) {
-    return bookModel.create({isbn, title, authors, published, subtitle, rating, thumbnails, userId, description })
+function newBook(isbn, title, authors, published, subtitle, rating, thumbnails, userId, description, read) {
+    return bookModel.create({isbn, title, authors, published, subtitle, rating, thumbnails, userId, description, read })
         .then(book => {
             console.log(thumbnails);
             return Promise.all([
@@ -48,11 +48,12 @@ function createBook(req, res, next) {
     const { subtitle } = req.body;
     const { rating } = req.body;
     const { description } = req.body;
+    const {read} = req.body;
 
     console.log("------------")
     console.log(thumbnails);
 
-    newBook(isbn, title, authors, published, subtitle, rating, thumbnails, userId, description)
+    newBook(isbn, title, authors, published, subtitle, rating, thumbnails, userId, description, read)
         .then(([_, updatedBook]) => res.status(200).json(updatedBook))
         .catch(next);
         
@@ -80,9 +81,10 @@ function editBook(req, res, next){
     const { subtitle } = req.body;
     const { rating } = req.body;
     const { description } = req.body;
+    const { read } = req.body;
 
 
-    bookModel.findOneAndUpdate({ _id: bookId, userId }, {isbn, title, authors, published, subtitle, rating, thumbnails, description}, { new: true })
+    bookModel.findOneAndUpdate({ _id: bookId, userId }, {isbn, title, authors, published, subtitle, rating, thumbnails, description, read}, { new: true })
     .then(updatedBook => {
         if (updatedBook) {
             res.status(200).json(updatedBook);

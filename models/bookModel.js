@@ -34,6 +34,10 @@ const bookSchema = new mongoose.Schema({
     description: {
         type: String,
         required: false
+    },
+    read: {
+        type: Boolean,
+        required: false
     }
 }, { timestamps: { createdAt: 'created_at' } });
 
