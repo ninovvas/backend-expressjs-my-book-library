@@ -16,7 +16,7 @@ function newBook(isbn, title, authors, published, subtitle, rating, thumbnails, 
 function getAllBooks(req, res, next) {
     const { _id: userId } = req.user;
     bookModel.find({userId})
-        //.sort({ created_at: -1 })
+        .sort({ created_at: -1 })
         //.populate('thumbnailId userId')
         .then(books => {
             res.status(200).json(books)
