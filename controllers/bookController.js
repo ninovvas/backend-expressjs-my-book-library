@@ -31,7 +31,7 @@ function checkBook(req, res, next) {
     const searchResult = new RegExp(isbn, 'i');
 
     console.log(isbn)
-    bookModel.find({isbn})
+    bookModel.find({userId, isbn})
         .then(book => {
             console.log(book);
                 res.status(200).json(book);

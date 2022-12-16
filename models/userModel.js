@@ -22,6 +22,21 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} must contains only latin letters and digits!`
         },
     },
+    
+    first_name:{
+        type: String,
+        required: true,
+    },
+
+    last_name: {
+        type: String,
+        required: true
+    },
+
+    address: {
+        type: String
+    },
+
     password: {
         type: String,
         required: true,
