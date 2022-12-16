@@ -8,7 +8,7 @@ const { bookController } = require('../controllers');
 router.get('/',  auth(), bookController.getAllBooks);
 router.post('/', auth(), bookController.createBook);
 
-
+router.get('/check/:isbn', auth(), bookController.checkBook);
 router.get('/catalog/:bookId', auth(), bookController.getBook);
 
 router.put('/edit/:bookId', auth(), bookController.editBook);

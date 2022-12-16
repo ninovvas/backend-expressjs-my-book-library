@@ -24,6 +24,21 @@ function getAllBooks(req, res, next) {
         .catch(next);
 }
 
+function checkBook(req, res, next) {
+    const { _id: userId } = req.user;
+    const { isbn } = req.params;
+
+    const searchResult = new RegExp(isbn, 'i');
+
+    console.log(isbn)
+    bookModel.find({isbn})
+        .then(book => {
+            console.log(book);
+                res.status(200).json(book);
+        })
+        .catch(next);
+}
+
 function searchBooks(req, res, next){
     const { _id: userId } = req.user;
     const { searchTerm } = req.params;
@@ -129,5 +144,6 @@ module.exports = {
     getBook,
     editBook,
     deleteBook,
-    searchBooks
+    searchBooks,
+    checkBook
 }
