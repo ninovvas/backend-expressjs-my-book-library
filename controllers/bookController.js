@@ -24,6 +24,17 @@ function getAllBooks(req, res, next) {
         .catch(next);
 }
 
+function getAllReadBooksByUser(req, res, next) {
+    const { _id: userId } = req.user;
+    read = true;
+    bookModel.find({userId, read: read})
+        .then(books => {
+            console.log(books);
+            res.status(200).json(books)
+        })
+        .catch(next);
+}
+
 function checkBook(req, res, next) {
     const { _id: userId } = req.user;
     const { isbn } = req.params;
@@ -145,5 +156,6 @@ module.exports = {
     editBook,
     deleteBook,
     searchBooks,
-    checkBook
+    checkBook,
+    getAllReadBooksByUser
 }
